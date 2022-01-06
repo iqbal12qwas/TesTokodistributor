@@ -22,7 +22,8 @@ type Response struct {
 	Data    []User `json:"data"`
 }
 
-func GetUserByID(w http.ResponseWriter, r *http.Request) {
+// Url Parameter
+func GetUrlParamUserByID(w http.ResponseWriter, r *http.Request) {
 	// Get Params By ID User
 	vars := mux.Vars(r)
 	key := vars["id"]
@@ -33,6 +34,27 @@ func GetUserByID(w http.ResponseWriter, r *http.Request) {
 	if key == "1" { //If key/id = 1
 		user = append(user, User{Id: 1, FirstName: "Muhammad", LastName: "Iqbal Zulkifli", Age: 23})
 	} else { //If key/id != 1
+		user = nil
+	}
+
+	// Show Response & Parse To Json
+	w.Header().Set("Content-Type", "application/json")
+	resp := Response{Http: "GET/200", Message: "Success", Data: user}
+	json.NewEncoder(w).Encode(resp)
+}
+
+// Request Parameter
+func GetReqParamUserByID(w http.ResponseWriter, r *http.Request) {
+	// Get Params By ID User
+	query := r.URL.Query()
+	key := query.Get("id")
+
+	// Data statis Get
+	var user []User
+
+	if key == "2" { //If key/id = 2
+		user = append(user, User{Id: 2, FirstName: "Silvana", LastName: "Mariani", Age: 20})
+	} else { //If key/id != 2
 		user = nil
 	}
 

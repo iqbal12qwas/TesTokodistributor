@@ -19,9 +19,10 @@ func main() {
 }
 
 func initaliseHandlers(router *mux.Router) {
-  // Route GET By Params ID "Task 1"
-  router.HandleFunc("/user/{id}", controllers.GetUserByID).Methods("GET")
+	// Route GET By Params ID "Task 1"
+	router.HandleFunc("/user/{id}", controllers.GetUrlParamUserByID).Methods("GET")
+	router.HandleFunc("/user", controllers.GetReqParamUserByID).Methods("GET")
 
-  // Route GET By Params ID "Task 2"
-  router.HandleFunc("/bowling", controllers.ChooseContainer).Methods("GET")
+	// Route GET By Params ID "Task 2"
+	router.HandleFunc("/bowling", controllers.ChooseContainer).Methods("GET")
 }
